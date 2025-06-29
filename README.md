@@ -95,22 +95,31 @@ There are many desktop applications for running LLMs locally, and LARS aims to b
     - If prompted for GitHub authentication, use a [Personal Access Token](https://github.com/settings/tokens) as passwords are deprecated. Also accessible via:      
         ```GitHub Settings -> Developer settings (located on the bottom left!) -> Personal access tokens```
 
-2. Install Python dependencies:
-    - Windows via PIP:
+2. Install Python dependencies using [uv](https://github.com/astral-sh/uv):
+    - Windows:
         ```
-        pip install -r .\requirements.txt
+        uv pip install -r .\requirements.txt
         ```
-    
-    - Linux via PIP:
+
+    - Linux:
         ```
-        pip3 install -r ./requirements.txt
+        uv pip install -r ./requirements_linux.txt
         ```
 
     - Note on Azure: Some required Azure libraries are NOT available on the MacOS platform! A separate requirements file is therefore included for MacOS excluding these libraries:
 
     - MacOS:
         ```
-        pip3 install -r ./requirements_mac.txt
+        uv pip install -r ./requirements_mac.txt
+        ```
+
+    After installing, you can generate a lock file for reproducible builds:
+        ```
+        uv pip compile -o requirements.lock requirements_linux.txt
+        ```
+    Then to install from the lock file:
+        ```
+        uv pip sync requirements.lock
         ```
 
 [Back to Table of Contents](https://github.com/abgulati/LARS?tab=readme-ov-file#table-of-contents)
@@ -373,7 +382,7 @@ There are many desktop applications for running LLMs locally, and LARS aims to b
     python3 --version
     ```
 
-- If you encounter errors with ```pip install```, try the following:
+- If you encounter errors with `uv pip install`, try the following:
 
 1. Remove version numbers:
 
