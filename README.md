@@ -138,6 +138,8 @@ There are many desktop applications for running LLMs locally, and LARS aims to b
 - All application directories required by LARS will now be created on disk
 
 - The HF-Waitress server will automatically start and will download an LLM (Microsoft Phi-3-Mini-Instruct-44) on the first-run, which may take a while depending on your internet connection speed
+- While the model is downloading and the server initializes, the web page will display **"Loading Core Backend..."** and your terminal may show repeated `ECONNREFUSED` messages. This is normal until the download completes and the server responds. The progress of the first run can be monitored in `hf_waitress_output_log.txt`.
+- During this time you might also see browser pop-ups saying there was an error reading `hf_config.json` or fetching the history-menu list. These appear because the HF-Waitress server has not finished starting yet and should disappear once the server is online.
 
 - On first-query, an embedding model (all-mpnet-base-v2) will be downloaded from HuggingFace Hub, which should take a brief time
 
